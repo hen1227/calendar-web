@@ -1,0 +1,15 @@
+.corner-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    /*background-color: #10888830;*/
+    /*border: 2px solid #108888cc;*/
+    color: #fff;
+    font-size: 12px;
+    text-decoration: none;
+    outline: none;
+    cursor: pointer;
+}

@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+.app {
+    background-color: #101020;
+    /*height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));*/
+    height: 100svh;
+
+    overflow: hidden;
+    text-align: center;
+    color: #fff
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #202040;
+    border-top: 1px solid #404080;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 100;
+    max-height: 35px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bottom-navbar a {
+    text-decoration: none;
+    font-size: 0.75em;
+    margin-top: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar-link {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    width: 30svw;
 }
 
-.App-link {
-  color: #61dafb;
+.error-text {
+    color: red;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.clubCard {
+    background-color: #202040;
+    border-radius: 20px;
+    margin: 15px 10%;
+    padding: 10px 20px;
+    border: #202040 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 14px;
+    max-width: 80%;
 }

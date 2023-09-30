@@ -1,0 +1,248 @@
+.calendarViewsCollection {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto 0;
+    width: 90%;
+    /*overflow-x: auto;*/
+    /*overflow-y: hidden;*/
+    overflow: hidden;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    /*height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));*/
+    height: 100svh;
+
+
+    /*    Grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 30px;
+    grid-auto-flow: row;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+
+    text-align: center;
+    color: white;
+
+}
+
+.calendarViewsCollection::-webkit-scrollbar {
+    display: none;
+}
+
+.calendarView {
+    width: 80%;
+    text-align: center;
+    position: relative;
+
+    /* Scroll */
+    top: 10px;
+    height: 82.5svh;
+    max-height: 100%;
+    overflow-y: scroll;
+    background: #151530;
+    border-radius: 30px;
+    padding: 30px 10%;
+    margin: 20px 0 0 0;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.calendarView::-webkit-scrollbar {
+    display: none;
+}
+
+.calendarView h2 {
+    height: 3vh;
+    text-align: center;
+    margin: auto;
+}
+
+.calendarColumn {
+    transition: all 0.5s ease;
+    width: 100%;
+}
+
+.calendarColumn.fullscreen {
+    width: 90vw;
+    /*position: absolute;*/
+    z-index: 100;
+}
+.calendarColumn.hidden {
+    width: 0;
+    margin: 0;
+    padding: 0;
+    display: none;
+}
+
+.footer-left {
+    display: none;
+}
+
+.footer-right {
+    display: none;
+}
+
+.eventCard {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+    border: #000c solid;
+    background-color: #80808030;
+
+    margin: 10px auto;
+    display: flex;
+
+    max-width: 400px;
+    width: 100%;
+    height: fit-content;
+    min-height: 60px;
+}
+
+.eventCard .clubName {
+    font-size: 1.3em;
+    font-weight: bolder;
+    text-align: center;
+    margin: 0;
+    padding: 10px 20px 0;
+}
+
+.eventCard .title {
+    font-size: 1.15em;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding: 3px 20px 10px;
+}
+
+.eventCard .eventDetails {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 20px;
+    padding: 2px 20px;
+}
+
+.eventCard p {
+    padding: 0 20px;
+    float: left;
+}
+
+.dayColumn {
+    padding: 10px 0;
+    margin: 10px 10px;
+    width: calc(90%);
+}
+
+.dayColumn .eventDetails {
+    padding: 0;
+    margin: 0;
+    align-content: center;
+}
+.dayColumn p {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.dayColumn {
+    text-align: center;
+}
+
+.dayCollection {
+/*   Grid children with 7 columns */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 0;
+    grid-auto-flow: row;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+    font-size: 14px;
+    overflow: scroll;
+
+    /*margin-left: -5vw;*/
+
+    width: 72.5vw;
+}
+
+/* Make collection views swipable between screens: */
+@media screen and (max-width: 1000px) {
+    .app {
+        width: 100vw;
+    }
+
+    .calendarViewsCollection {
+        flex-direction: row;
+        scroll-snap-type: x mandatory;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+    .calendarColumn {
+        padding: 0 15vw;
+        width: 100vw;
+    }
+
+    .calendarView {
+        width: 70vw;
+        /*height: calc(82.5svh - 50px);*/
+        height: 75svh;
+        margin: 0;
+        padding: 30px 10%;
+
+        scroll-snap-align: center;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 90%;
+        height: 10px;
+        margin: 20px 0;
+        border-radius: 30px;
+        background: #101020;
+        /*background: #404080;*/
+        color: #BEBEBEA0;
+        font-weight: bolder;
+        font-size: 0.75em;
+        left: 0;
+    }
+
+    .footer-left {
+        display: flex;
+        text-align: left;
+        padding-left: 15px;
+    }
+    .footer-right {
+        display: flex;
+        text-align: right;
+        padding-right: 15px;
+    }
+
+    .eventCard {
+        width: 100%;
+    }
+
+    .eventCard .eventDetails {
+        padding: 2px 0;
+        font-size: 15px;
+    }
+
+    .eventCard p {
+        padding: 0 10px;
+    }
+
+    .fullscreen-button {
+        display: none;
+    }
+}

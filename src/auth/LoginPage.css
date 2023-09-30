@@ -1,0 +1,41 @@
+
+.main-view {
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    /*position: relative;*/
+}
+
+.login-form {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.login-form .input {
+    background-color: #1040AA30;
+    border-color: #1040AACC;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    /*color: #BEBEBEA0;*/
+    color: #fff;
+    width: 80%;
+}
+
+.login-form .button {
+    background-color: #10AA4030;
+    border-color: #10AA40CC;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    width: 80%;
+}
