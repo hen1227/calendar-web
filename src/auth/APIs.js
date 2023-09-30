@@ -1,5 +1,5 @@
-const backendIP = 'http://10.31.64.43:4001';
-// const backendIP = 'https://api.henhen1227.com';
+// const backendIP = 'http://10.31.64.43:4001';
+const backendIP = 'https://api.henhen1227.com';
 
 export default function sendAPICall(
   toURL,
