@@ -1,6 +1,7 @@
 {
   "name": "calendar-web",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "homepage": "https://spsnow.henhen1227.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

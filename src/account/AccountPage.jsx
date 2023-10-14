@@ -78,7 +78,7 @@ const AccountPage = () => {
                     </>
                 )}
                 {!currentUser && (
-                    <Button title={'Login'} onClick={navigate('/login')}/>
+                    <Button title={'Login'} onClick={()=> navigate('/login')}/>
                 )}
             </div>
             {currentUser && (

@@ -14,6 +14,8 @@ import EditClubDetailsPage from "./create/EditClubDetailsPage";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+// TODO: Fix text wrapping looking bad on calendar view.
+
 function App() {
   return (
       <AuthProvider>
