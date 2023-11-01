@@ -13,6 +13,7 @@ import ClubDetailsPage from "./calendar/ClubDetailsPage";
 import EditClubDetailsPage from "./create/EditClubDetailsPage";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import DiningPage from "./dining/DiningPage";
 
 // TODO: Fix text wrapping looking bad on calendar view.
 
@@ -24,6 +25,7 @@ function App() {
               <div className={"app"}>
                   <Routes>
                       <Route path="/" exact element={<CalendarPage />} />
+                      <Route path="/dining" exact element={<DiningPage />} />
                       <Route path="/calendar" exact element={<CalendarPage />} />
                       <Route path="/login" exact element={<LoginPage />} />
                       <Route path="/create" element={<CreatePage />} />

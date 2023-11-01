@@ -6,6 +6,7 @@ import {getScheduleForWeek, isPast} from "./SchoolClassesCalendar";
 import {useNavigate} from "react-router-dom";
 import {ReactComponent as FullScreenIcon} from '../icons/up-right-and-down-left-from-center-solid.svg';
 import {ReactComponent as MinimizeScreenIcon} from '../icons/down-left-and-up-right-to-center-solid.svg';
+import {ReactComponent as XIcon} from '../icons/xmark-solid.svg';
 import {toast} from "react-toastify";
 
 
@@ -53,7 +54,7 @@ const CalendarPage = () => {
             } else if (date.toDateString() === tomorrow.toDateString()) {
                 return "Tomorrow";
             } else if (date >= today && date <= inOneWeek) {
-                return daysOfWeek[date.getDay()];
+                return "Next " + daysOfWeek[date.getDay()];
             } else {
                 return `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
             }
@@ -110,10 +111,12 @@ const CalendarPage = () => {
         sendAPICall('/allData', 'GET', {}, currentUser)
             .then((data) => {
                 console.log(data)
+                console.log(currentUser)
                 setAllEvents(data.allEvents);
                 setAllClubs(data.allClubs);
                 setAllSubscribedClubs(data.subscribedClubs);
                 setAllLedClubs(data.ledClubs);
+
 
                 setIsOnline(true);
                 saveLastUpdated(new Date());
@@ -137,7 +140,6 @@ const CalendarPage = () => {
 
     useEffect(() => {
         fetchData().then(r => console.log("Fetched data!"));
-
     }, [currentUser]);
 
 
@@ -200,6 +202,27 @@ const CalendarPage = () => {
 
     const clickedClub = (clubId) => {
         navigate('/club/' + clubId)
+    }
+
+    async function deleteEventDialog(id) {
+
+        if (!currentUser) {
+            window.alert("You must be logged in to delete an event");
+            return;
+        }
+
+        if (window.confirm("Are you sure you want to delete this event?"))
+            deleteEvent(id).then(r => fetchData());
+    }
+
+    const deleteEvent = async (id) => {
+        sendAPICall(`/events/${id}`, 'DELETE', {}, currentUser)
+            .then((data)=>{
+
+            })
+            .catch(err => {
+
+            })
     }
 
     const zoomInView = (index) => {
@@ -280,8 +303,26 @@ const CalendarPage = () => {
                                 <div className={currentFullScreen === 1 ? 'dayColumn' : ''}>
                                     <h2>{dayItem.dayTitle}</h2>
                                 {dayItem.eventsList && dayItem.eventsList.map((event) => {
+
+                                    let isSubbed = false;
+                                    let isLed = false;
+
+                                    if (allLedClubs !== [] && allSubscribedClubs !== [] && event.club != null) {
+                                        const ledNames = allLedClubs.map((club) => club.name);
+                                        const SubNames = allSubscribedClubs.map((club) => club.name);
+                                        isLed = ledNames.includes(event.club);
+                                        isSubbed = SubNames.includes(event.club);
+                                    }
+
                                     return (
-                                        <div key={event.name} style={{borderColor: event.color+"cc", backgroundColor: event.color+"33"}} className={'eventCard'}>
+                                        <div key={event.name} style={{borderColor: event.color+"cc", backgroundColor: event.color+"33", position: 'relative'}} className={'eventCard'}>
+                                            {isLed && (
+                                                <div className={'corner-button close'} color={"#DD0000"} onClick={async () => {
+                                                        await deleteEventDialog(event.id)
+                                                }}>
+                                                    <XIcon color={'#fff'} width={20} height={20} />
+                                                </div>
+                                            )}
                                             <h3 className={'clubName'}>{event.club}</h3>
                                             <h4 className={'title'}>{event.title}</h4>
                                             <div className={'eventDetails'}>
@@ -327,8 +368,8 @@ const CalendarPage = () => {
                                         return (
                                             <div id={`${dayItem.day} – ${event.block}`} key={`${dayItem.day} – ${event.block}`} style={ hasPast ? {backgroundColor: "#40604030", borderColor: "#406040CC", height: event.duration} : {backgroundColor: event.color+"33", borderColor: event.color+"cc", height: event.duration}} className={'eventCard'}>
                                                 <div key={`details ${dayItem.day} – ${event.block}`} className={'eventDetails'}>
-                                                    <p>{event.block + (event.name === '' ? '' : (" - " + event.name))}</p>
-                                                    <p>{event.startTime} - {event.endTime}</p>
+                                                    <span>{event.block + (event.name === '' ? '' : (" - " + event.name))}</span>
+                                                    <span style={{padding: 30}}>{event.startTime} - {event.endTime}</span>
                                                 </div>
                                             </div>
                                         )}

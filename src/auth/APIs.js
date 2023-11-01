@@ -1,4 +1,5 @@
-// const backendIP = 'http://10.31.64.43:4001';
+// const backendIP = 'http://10.31.64.37:4001';
+// const backendIP = 'http://localhost:4001';
 const backendIP = 'https://api.henhen1227.com';
 
 export default function sendAPICall(

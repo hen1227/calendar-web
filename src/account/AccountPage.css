@@ -13,3 +13,15 @@
     outline: none;
     cursor: pointer;
 }
+
+.corner-button.close {
+    padding: 3px;
+    background: red;
+    margin: 0;
+    right: -10px;
+    top: -10px;
+    border-radius: 100%;
+    aspect-ratio: 1;
+    height: 20px;
+    text-align: center;
+}

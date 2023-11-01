@@ -1,0 +1,108 @@
+.diningPage {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    gap: 20px;
+    padding: 20px;
+
+    scroll-snap-type: x proximity;
+
+    /*box-sizing: border-box;*/
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.dayContainer {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 70px;
+    min-width: 60svw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #101020;
+
+    scroll-snap-align: center;
+}
+
+.mealContainer {
+    margin-top: 20px;
+}
+
+.mealContainer h2 {
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.mealContainer h3 {
+    margin-top: 40px;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #eee;
+}
+
+.mealContainer h4 {
+    font-size: 1em;
+    margin: 10px 0 5px 0;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    background-color: #141428;
+    font-weight: 400;
+    color: #ddd;
+}
+
+.mealContainer h4:hover {
+    background-color: #202040;
+}
+
+.mealContainer ul {
+    margin: 0;
+    padding: 5px 0 0;
+    list-style: none;
+    min-height: 40px;
+}
+
+.mealContainer li {
+    padding: 3px 0;
+    font-size: 0.9em;
+    color: #bbb;
+}
+
+
+/* Make collection views swipable between screens: */
+@media screen and (max-width: 1000px) {
+    .diningPage {
+        scroll-snap-type: x mandatory;
+    }
+
+    .mealContainer h4:hover {
+        background-color: #141428;
+    }
+
+    .dayContainer {
+        flex-direction: column;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        min-width: 100vw;
+        margin: 0;
+        padding: 0;
+
+        border: none;
+    }
+
+    .mealContainer {
+        padding: 0 7.5%;
+        width: 85%;
+    }
+}

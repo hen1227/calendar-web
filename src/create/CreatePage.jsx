@@ -28,25 +28,29 @@ const CreatePage = () => {
         return (
             <LoginPage />
         );
-    }else{
+    }else {
         return (
-          <div className={'main-view'}>
+            <div className={'main-view'}>
                 <h1>Lead Clubs</h1>
-              {leadClubs.length !== 0 &&
-                  <div style={{height: '70svh'}}>
-                      {leadClubs.map((club) => (
-                          <div className={'eventCard'} style={{backgroundColor: club.color+'30', borderColor: club.color+'CC'}} onClick={()=>{navigate(`/edit/${club.id}`)}}>
-                              <h2>{club.name}</h2>
-                              <p>{club.description}</p>
-                          </div>
-                      ))}
-                  </div>
-              }
-              {leadClubs.length === 0 && <p style={{height: '70svh'}}>You are not leading any clubs</p>}
-              <Link to='/create/club'>
-                <Button title={'Create New Club'} color={'#105588'} />
-              </Link>
-          </div>
+                {leadClubs.length !== 0 &&
+                    <div style={{height: '70svh'}}>
+                        {leadClubs.map((club) => (
+                            <div className={'eventCard'}
+                                 style={{backgroundColor: club.color + '30', borderColor: club.color + 'CC'}}
+                                 onClick={() => {
+                                     navigate(`/edit/${club.id}`)
+                                 }}>
+                                <h2>{club.name}</h2>
+                                <p>{club.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                }
+                {leadClubs.length === 0 && <p style={{height: '70svh'}}>You are not leading any clubs</p>}
+                <Link to='/create/club'>
+                    <Button title={'Create New Club'} color={'#105588'}/>
+                </Link>
+            </div>
         );
     }
 }

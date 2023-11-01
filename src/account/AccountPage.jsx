@@ -5,12 +5,11 @@ import sendAPICall from "../auth/APIs";
 import {useNavigate} from "react-router-dom";
 import {sendVerificationEmail} from "../components/VerificationEmail";
 import {toast} from "react-toastify";
+import {displayNotificationDirectly} from "../Notifications";
 
 const AccountPage = () => {
     const {currentUser, logout} = useAuth();
     const navigate = useNavigate();
-
-
 
     const onDeleteClicked = () => {
         console.log("delete clicked");
@@ -31,13 +30,11 @@ const AccountPage = () => {
                     toast.error('Failed to delete account!')
                 });
         }
-
-
     }
 
     return (
         <div className={'main-view'}>
-            <div style={{height: '70vh'}}>
+            <div style={{height: '70vh', marginBottom: 30}}>
                 <h1 style={{marginTop: 50}}>Account</h1>
                 {currentUser && (
                     <>
@@ -75,6 +72,7 @@ const AccountPage = () => {
                                 </>
                             )}
                         </div>
+                        <Button color={"#10AA4030"} borderColor={"#10AA40CC"} title={'Manage Clubs & Events'} onClick={()=> navigate('/create')}/>
                     </>
                 )}
                 {!currentUser && (
@@ -82,9 +80,16 @@ const AccountPage = () => {
                 )}
             </div>
             {currentUser && (
-                <Button title={'Logout'} onClick={()=>{
-                    logout();
-                }} />
+                <>
+                    <Button title={'Logout'} onClick={()=>{
+                        logout();
+                    }} />
+                    <Button title={'Send Test Notification'} onClick={()=>{
+                        displayNotificationDirectly().then((data) => {
+                            console.log('Success:', data);
+                        });
+                    }}/>
+                </>
             )}
         </div>
     );

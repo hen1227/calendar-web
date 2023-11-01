@@ -1,6 +1,7 @@
 import React from 'react';
 import {createContext, useContext, useEffect, useState} from "react";
 import sendAPICall from "./APIs";
+import {subscribeUserToPush} from "../Notifications";
 
 const AuthContext = createContext();
 
@@ -24,6 +25,11 @@ export function AuthProvider({ children }) {
                         // console.log("Got user data", data)
                         data.token = token;
                         console.log("Logging in ", data);
+                        subscribeUserToPush()
+                            .then(pushSubscription => {
+                                sendAPICall('/saveDeviceToken', 'POST', {deviceToken: JSON.stringify(pushSubscription), platform: "web"}, data, false)
+                            })
+                            .catch(err => console.log(err));
                         setCurrentUser(data);
                     })
                     .catch(err => {
