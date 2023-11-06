@@ -20,7 +20,7 @@ const DiningPage = () => {
     useEffect(() => {
         // Get the current date and time
         const now = new Date();
-        const today = now.getDate().toString().padStart(2, '0');
+        const today = now.getDate().toString(); // .padStart(2, '0');
         const currentHour = now.getHours();
 
         // Determine the most relevant meal based on the current time
