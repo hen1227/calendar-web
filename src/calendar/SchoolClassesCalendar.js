@@ -1,4 +1,81 @@
 
+
+async function getCalendarEvents(dateFrom, dateTo) {
+    const formatDate = (date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const url = `https://www.googleapis.com/calendar/v3/calendars/spsacademiccal%40gmail.com/events?key=AIzaSyBxoBIAkPxbC1hZNtFOmpHFv_z2ya9I838&timeMin=${formatDate(dateFrom)}T00%3A00%3A00-05%3A00&timeMax=${formatDate(dateTo)}T00%3A00%3A00-05%3A00&singleEvents=true&maxResults=9999`;
+
+    try {
+        const response = await fetch(url, { method: 'GET' });
+        if (response.status === 200) {
+            const data = await response.json();
+            const calendarEvents = data.items.filter(item => item.status === 'confirmed')
+                .map(item => {
+                    return {
+                        name: item.summary,
+                        startDateTime: new Date(item.start.dateTime),
+                        endDateTime: new Date(item.end.dateTime)
+                    };
+                });
+            return calendarEvents;
+        } else {
+            console.error(`Failed to retrieve calendar. Status Code: ${response.status}`);
+            return null;
+        }
+    } catch (error) {
+        console.error(`Error: ${error}`);
+        return null;
+    }
+}
+// Usage example:
+// getCalendarEvents(new Date('2024-01-01'), new Date('2024-12-31'))
+// .then(events => console.log(events));
+
+
+async function createWeekSchedule() {
+    // Define the week range
+    const weekStart = new Date('2024-01-22'); // Start of the week
+    const weekEnd = new Date('2024-01-29');   // End of the week
+
+    const events = await getCalendarEvents(weekStart, weekEnd);
+
+    // Initialize week schedule
+    const weekSchedule = {
+        Monday: [],
+        Tuesday: [],
+        Wednesday: [],
+        Thursday: [],
+        Friday: [],
+        Saturday: [],
+        Sunday: []
+    };
+
+    // Helper function to format events
+    function formatEvent(event) {
+        const startTime = event.startDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        const endTime = event.endDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        const duration = (event.endDateTime - event.startDateTime) / (1000 * 60); // Convert duration to minutes
+
+        return {
+            block: event.name,
+            startTime,
+            duration
+        };
+    }
+
+    // Iterate over events and assign to the correct day
+    events.forEach(event => {
+        const dayOfWeek = event.startDateTime.toLocaleString('en-US', { weekday: 'long' });
+        if (weekSchedule[dayOfWeek]) {
+            weekSchedule[dayOfWeek].push(formatEvent(event));
+        }
+    });
+    
+    console.log(weekSchedule)
+    return weekSchedule;
+}
+
+
+
 export const classDefaults = {
     'A': { block: 'A', name: 'Block A', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
     'B': { block: 'B', name: 'Block B', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
@@ -21,10 +98,11 @@ export async function getClassList() {
     for(let i = 0; i < blocks.length; i++){
         classes.push(await getClassDetails(blocks[i]));
     }
+    
     return classes;
 }
 
-export const weekSchedule = {
+export const weekSchedule = createWeekSchedule();/*{
     Monday: [
         {block: 'Chapel', startTime: '8:30 AM', duration: 25},
         {block: 'A', startTime: '9:05 AM', duration: 45},
@@ -75,7 +153,7 @@ export const weekSchedule = {
         {block: 'Lunch', startTime: '12:00 PM', duration: 90},
     ],
     Sunday: [],
-};
+}; */
 
 export async function getScheduleForWeek() {
     const scheduleForWeek = [];
