@@ -12,14 +12,14 @@ const AccountPage = () => {
     const navigate = useNavigate();
 
     const onDeleteClicked = () => {
-        console.log("delete clicked");
+        //console.log("delete clicked");
         // Alert to confirm
         if (window.confirm( "Are you sure you want to delete your account? This action cannot be undone.")){
-            console.log("confirmed");
+            //console.log("confirmed");
             // Delete account
             sendAPICall(`/account`, 'DELETE', {}, currentUser, true)
                 .then(data => {
-                    console.log('Success:', data);
+                    //console.log('Success:', data);
 
                     toast.success('Successfully deleted account!')
                     // Logout
@@ -86,7 +86,7 @@ const AccountPage = () => {
                     }} />
                     <Button title={'Send Test Notification'} onClick={()=>{
                         displayNotificationDirectly().then((data) => {
-                            console.log('Success:', data);
+                            //console.log('Success:', data);
                         });
                     }}/>
                 </>

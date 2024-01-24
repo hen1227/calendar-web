@@ -11,7 +11,7 @@ const DiningPage = () => {
     useEffect(() => {
         sendAPICall('/menu', 'GET', {}, null, false)
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 setMealsData(data);
                 initializeOpenSections(data);
             });
@@ -30,7 +30,7 @@ const DiningPage = () => {
         } else if (currentHour >= 10) {
             relevantMeal = 'lunch';
         }
-        console.log(relevantMeal)
+        //console.log(relevantMeal)
 
         // Create the id of the meal container for today
         const dayContainerId = `mealContainer-${today}`;

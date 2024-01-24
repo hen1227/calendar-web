@@ -15,7 +15,7 @@ const ClubDetailsPage = () => {
     const reloadClubData = () => {
         sendAPICall(`/club/${clubId}`, 'GET', {}, null, false)
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 setClubData(data);
             })
     }
@@ -28,7 +28,7 @@ const ClubDetailsPage = () => {
     const becomeMember = () => {
         sendAPICall(`/${clubId}/subscribe`, 'POST', {}, currentUser, false)
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 reloadClubData();
                 toast.success(`You are now a member of ${clubData.name}`)
             })
@@ -41,7 +41,7 @@ const ClubDetailsPage = () => {
     const leaveClub = () => {
         sendAPICall(`/${clubId}/unsubscribe`, 'POST', {}, currentUser, false)
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 reloadClubData();
                 toast.success(`You are no longer a member of ${clubData.name}`)
             })

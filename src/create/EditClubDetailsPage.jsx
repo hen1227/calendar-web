@@ -24,7 +24,7 @@ const EditClubDetailsPage = () => {
     const reloadClubData = () => {
         sendAPICall(`/club/${clubId}`, 'GET', {}, null, false)
             .then((data) => {
-                console.log(data);
+                //console.log(data);
                 setClubData(data);
                 setName(data.name);
                 setDescription(data.description);
@@ -47,7 +47,7 @@ const EditClubDetailsPage = () => {
         if(window.confirm("Are you sure you want to delete this club? This action cannot be undone.")) {
             sendAPICall(`/club/${clubId}`, 'DELETE', {}, currentUser, false)
                 .then((data) => {
-                    console.log(data);
+                    //console.log(data);
                     toast.success('Deleted club!');
                     navigate('/create');
                 })

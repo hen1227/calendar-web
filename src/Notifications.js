@@ -9,14 +9,14 @@ export function subscribeUserToPush() {
             return registration.pushManager.subscribe(subscribeOptions);
         })
         .then(pushSubscription => {
-            console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+            //console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
             return pushSubscription;
         });
 }
 
 export const displayNotificationDirectly = async () => {
     if (Notification.permission !== 'granted') {
-        console.log('notification permission missing');
+        //console.log('notification permission missing');
         return;
     }
 
