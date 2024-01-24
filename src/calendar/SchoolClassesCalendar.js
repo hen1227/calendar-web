@@ -258,6 +258,39 @@ export const blockTocolor = {
     'Chapel': '#7520EE',
 };
 
+// this would be someones classes and they would add there classes here
+export const blockToName = {
+    'A': '',
+    'A1': '',
+    'A2': '',
+
+    'B ': '', // some reason needs a space
+    'B1': '',
+    'B2': '',
+
+    'C': '',
+    'C1': '',
+    'C2': '',
+
+    'D': '',
+    'D1': '',
+    'D2': '',
+
+
+    'E': '',
+    'E1': '',
+    'E2': '',
+
+    'F': '',
+    'F1': '',
+    'F2': '',
+
+    'FLEX': '',
+    'House Meetings': '',
+    'Lunch': '',
+    'Chapel': '',
+};
+
 export async function getClassList() {
     const blocks = ['A', 'B', 'C', 'D', 'E', 'F','A1', 'B1', 'C1', 'D1', 'E1', 'F1','A2', 'B2', 'C2', 'D2', 'E2', 'F2'];
     let classes = [];
@@ -329,6 +362,11 @@ export async function calculateScheduleForDay(day) {
             var bloc_color = blockTocolor[blockInfo.block];
         } catch (error) {
             var bloc_color = '#FFBC00';
+        }
+        try {
+            var block_name = blockToName[blockInfo.block];
+        } catch (error) {
+            var block_name = '';
         }
 
         return {
