@@ -142,6 +142,10 @@ async function createWeekSchedule() {
         if (event.name == "FLEX") {
             event.name = "FLEX";
         }
+        if (event.name == "HouseMeetings") {
+            event.name = "House Meetings";
+        }
+        
         return {
             block: event.name,
             startTime,
@@ -194,7 +198,7 @@ function downloadObjectAsJson(exportObj, exportName){
     downloadAnchorNode.remove();
 }
 
-//downloadObjectAsJson(a , "data")
+//downloadObjectAsJson(week , "data")
 
 export const classDefaults = {
     'A': { block: 'A', name: 'Block A', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
@@ -260,15 +264,25 @@ export const blockTocolor = {
 };
 
 // this would be someones classes and they would add there classes here
-const scheduleBlocks = {
+/*
+const scheduleBlocks = { // make isHumanites thing or is 
     'A': 'Free',
-
     'B': 'Math',
     'C': 'Art',
     'D': 'Science',
     'E': 'Humanities',
     'F': 'Language',
 }
+*/
+const scheduleBlocks = {
+    'A': '',
+    'B': '',
+    'C': '',
+    'D': '',
+    'E': '',
+    'F': '',
+}
+
 const possilbe_class_blocks = ["Free", "Math", "Art", "Science", "Humanities", "Language"]
 
 
