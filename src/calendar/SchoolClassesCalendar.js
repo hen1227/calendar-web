@@ -138,6 +138,7 @@ async function createWeekSchedule() {
         const startTime = event.startDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
         const endTime = event.endDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
         const duration = (event.endDateTime - event.startDateTime) / (1000 * 60); // Convert duration to minutes
+        event.name = event.name.replace(/\s+/g, ''); // remove spaces as the data sometimes has a space like 
         if (event.name == "FLEX") {
             event.name = "FLEX";
         }
@@ -231,7 +232,7 @@ export const blockTocolor = {
     'A1': '#FFBC00',
     'A2': '#FFBC00',
 
-    'B ': '#FFBC00', // some reason needs a space
+    'B': '#FFBC00', // some reason needs a space
     'B1': '#FFBC00',
     'B2': '#FFBC00',
 
@@ -259,12 +260,25 @@ export const blockTocolor = {
 };
 
 // this would be someones classes and they would add there classes here
-export const blockToName = {
+const scheduleBlocks = {
+    'A': 'Free',
+
+    'B': 'Math',
+    'C': 'Art',
+    'D': 'Science',
+    'E': 'Humanities',
+    'F': 'Language',
+}
+const possilbe_class_blocks = ["Free", "Math", "Art", "Science", "Humanities", "Language"]
+
+
+
+var blockToName = {
     'A': '',
     'A1': '',
     'A2': '',
 
-    'B ': '', // some reason needs a space
+    'B': '', // some reason needs a space
     'B1': '',
     'B2': '',
 
@@ -291,6 +305,30 @@ export const blockToName = {
     'Chapel': '',
 };
 
+
+function calcuateBlocks() {
+    // A
+
+    var letters= ["A", "B", "C", "D", "E", "F"];
+
+    
+    letters.forEach((letter, index) => {
+        var block_name = scheduleBlocks[letter]; 
+            if (block_name == "Humanities" || block_name == "Math") {
+                blockToName[letter] = block_name;
+                blockToName[letter + "1"] = block_name;
+                blockToName[letter + "2"] = "Lunch";
+            } else {
+                blockToName[letter] = block_name;
+                blockToName[letter + "2"] = block_name;
+                blockToName[letter + "1"] = "Lunch";
+            }
+            
+    });
+
+} 
+
+calcuateBlocks();
 export async function getClassList() {
     const blocks = ['A', 'B', 'C', 'D', 'E', 'F','A1', 'B1', 'C1', 'D1', 'E1', 'F1','A2', 'B2', 'C2', 'D2', 'E2', 'F2'];
     let classes = [];
@@ -340,8 +378,7 @@ export async function calculateScheduleForDay(day) {
         let duration = blockInfo.duration; // can just make blockinfo have end time instead
         let endTime = addMinutesToTime(startTime, blockInfo.duration);
 
-        let skipNext = false;
-        let skipThis = false;
+        let skipThis1 = false;
         /*
         if (block.isHumanities) {
             // If the current block is humanities and is preceded by a Humflex
@@ -363,18 +400,47 @@ export async function calculateScheduleForDay(day) {
         } catch (error) {
             var bloc_color = '#FFBC00';
         }
+
+
+
+
         try {
             var block_name = blockToName[blockInfo.block];
+            if (block_name == undefined) {
+                block_name = ''
+            }
+
+            if (block_name == 'Humanities') {
+                
+                // If the current block is humanities and is preceded by a Humflex
+                //console.log(scheduleForDay[currentIndex - 1].block)
+                if (scheduleForDay[currentIndex - 1]?.block == 'FLEX') {
+                    startTime = subtractMinutesFromTime(startTime, 30);
+                    duration += 30;
+                }
+                // If the current block is humanities and is followed by a Humflex
+                else if (scheduleForDay[currentIndex + 1]?.block == 'FLEX') {
+                    duration += 30;
+                    endTime = addMinutesToTime(endTime, 30);
+                }
+                
+                
+            } // maybe else
+            if (blockInfo.block == 'FLEX'){
+                skipThis1 = (blockToName[scheduleForDay[currentIndex - 1].block] == 'Humanities') || (blockToName[scheduleForDay[currentIndex + 1].block] == 'Humanities');
+                //skipThis1 = scheduleForDay[currentIndex + 1].block == 'Humanities';
+
+            }
         } catch (error) {
             var block_name = '';
         }
 
         return {
-            skipNext,
-            skipThis,
+            skipNext: false,
+            skipThis: skipThis1,
             classBlock: {
                 block: blockInfo.block,
-                name: '',
+                name: block_name,
                 color: bloc_color, // find block
                 duration: duration,
                 startTime: removeAMPM(startTime),
@@ -427,22 +493,18 @@ export async function calculateScheduleForDay(day) {
 
     for (let i = 0; i < scheduleForDay.length; i++) {
         const blockInfo = scheduleForDay[i];
-        const { classBlock, skipNext, skipThis } = await getClassBlock(blockInfo, i);
-        classTimes.push(classBlock);
-        /*
+ 
+        
         //console.log("blockinfo", blockInfo);
-        if (blockInfo.isLunch) {
-            const block = await getClassDetails(blockInfo.block);
-            //await addLunchBlocks(block, blockInfo.startTime);
-        } else {
+      
             const { classBlock, skipNext, skipThis } = await getClassBlock(blockInfo, i);
-
+            //console.log(skipThis)
             if (!skipThis) classTimes.push(classBlock);
 
-            if (skipNext) i++;
+       
             
-        }
-        */
+        
+        
     }
 
     return {
