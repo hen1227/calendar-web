@@ -275,12 +275,12 @@ const scheduleBlocks = { // make isHumanites thing or is
 }
 */
 const scheduleBlocks = {
-    'A': '',
-    'B': '',
-    'C': '',
-    'D': '',
-    'E': '',
-    'F': '',
+    'A': {name: '', isHum: false, isFirstLunch: false},
+    'B': {name: '', isHum: false, isFirstLunch: false},
+    'C': {name: '', isHum: false, isFirstLunch: false},
+    'D': {name: '', isHum: false, isFirstLunch: false},
+    'E': {name: '', isHum: true, isFirstLunch: true},
+    'F': {name: '', isHum: false, isFirstLunch: false},
 }
 
 const possilbe_class_blocks = ["Free", "Math", "Art", "Science", "Humanities", "Language"]
@@ -327,8 +327,9 @@ function calcuateBlocks() {
 
     
     letters.forEach((letter, index) => {
-        var block_name = scheduleBlocks[letter]; 
-            if (block_name == "Humanities" || block_name == "Math") {
+        var block_name = scheduleBlocks[letter].name; 
+        if (block_name != '') {
+            if (scheduleBlocks[letter].isFirstLunch) {
                 blockToName[letter] = block_name;
                 blockToName[letter + "1"] = block_name;
                 blockToName[letter + "2"] = "Lunch";
@@ -337,7 +338,7 @@ function calcuateBlocks() {
                 blockToName[letter + "2"] = block_name;
                 blockToName[letter + "1"] = "Lunch";
             }
-            
+        }
     });
 
 } 
@@ -424,7 +425,7 @@ export async function calculateScheduleForDay(day) {
                 block_name = ''
             }
 
-            if (block_name == 'Humanities') {
+            if (scheduleBlocks[blockInfo.block].isHum) {
                 
                 // If the current block is humanities and is preceded by a Humflex
                 //console.log(scheduleForDay[currentIndex - 1].block)
@@ -441,7 +442,7 @@ export async function calculateScheduleForDay(day) {
                 
             } // maybe else
             if (blockInfo.block == 'FLEX'){
-                skipThis1 = (blockToName[scheduleForDay[currentIndex - 1].block] == 'Humanities') || (blockToName[scheduleForDay[currentIndex + 1].block] == 'Humanities');
+                skipThis1 = (scheduleBlocks[scheduleForDay[currentIndex - 1].block].isHum) || (scheduleBlocks[scheduleForDay[currentIndex + 1].block].isHum);
                 //skipThis1 = scheduleForDay[currentIndex + 1].block == 'Humanities';
 
             }
