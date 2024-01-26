@@ -92,7 +92,7 @@ const CalendarPage = () => {
             result[key].eventsList.push(eventWithTime);
         });
 
-        console.log('Sequential events:', result);
+        //console.log('Sequential events:', result);
 
         setSequentialEvents(result);
     };
@@ -110,8 +110,8 @@ const CalendarPage = () => {
 
         sendAPICall('/allData', 'GET', {}, currentUser)
             .then((data) => {
-                console.log(data)
-                console.log(currentUser)
+                //console.log(data)
+                //console.log(currentUser)
                 setAllEvents(data.allEvents);
                 setAllClubs(data.allClubs);
                 setAllSubscribedClubs(data.subscribedClubs);
@@ -148,7 +148,7 @@ const CalendarPage = () => {
             try {
                 const schedule = await getScheduleForWeek();
                 setAllClasses(schedule);
-                console.log(schedule);
+                //console.log(schedule);
             } catch (error) {
                 console.error('Error fetching schedule:', error);
             } finally {

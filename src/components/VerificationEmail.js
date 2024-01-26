@@ -3,7 +3,7 @@ import sendAPICall from "../auth/APIs";
 export async function sendVerificationEmail(user){
     sendAPICall(`/sendVerificationEmail`, 'POST', {}, user)
     .then(data => {
-        console.log('Success:', data);
+        //console.log('Success:', data);
         window.alert('Verification email sent!');
         return data;
     })

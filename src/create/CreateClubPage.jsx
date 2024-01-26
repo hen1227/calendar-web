@@ -34,7 +34,7 @@ const CreateClubPage = () => {
                 navigate('/create');
             })
             .catch((error) => {
-                console.log(error);
+                //console.log(error);
                 setErrorMessage(`${error}`);
             });
     }

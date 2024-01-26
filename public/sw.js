@@ -31,7 +31,7 @@ self.addEventListener('push', (e) => {
 
 self.addEventListener('notificationclick', (event) => {
     const eventAction = event.action;
-    console.log('message event fired! event action is:', `'${eventAction}'`);
+    //console.log('message event fired! event action is:', `'${eventAction}'`);
 
     let url = 'https://spsnow.henhen1227.com';
     if (eventAction === 'dining') {

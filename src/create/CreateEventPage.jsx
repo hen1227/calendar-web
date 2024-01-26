@@ -47,7 +47,7 @@ const CreateEventPage = () => {
 
         sendAPICall(`/${location.state.club.id}/events`, 'POST', event, currentUser, false)
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 toast.success('Created event!');
                 navigate(`/edit/${location.state.club.id}`);
             })

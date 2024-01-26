@@ -22,9 +22,9 @@ export function AuthProvider({ children }) {
                 const user = {token: token}
                 sendAPICall( '/account', 'GET', null, user, true)
                     .then((data) => {
-                        // console.log("Got user data", data)
+                        // //console.log("Got user data", data)
                         data.token = token;
-                        console.log("Logging in ", data);
+                        //console.log("Logging in ", data);
                         subscribeUserToPush()
                             .then(pushSubscription => {
                                 sendAPICall('/saveDeviceToken', 'POST', {deviceToken: JSON.stringify(pushSubscription), platform: "web"}, data, false)

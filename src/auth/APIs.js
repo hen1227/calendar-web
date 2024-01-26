@@ -9,7 +9,7 @@ export default function sendAPICall(
   currentUser,
   isAuthPath = false,
 ) {
-  console.log('POST' ? JSON.stringify(data) : null)
+  //console.log('POST' ? JSON.stringify(data) : null)
   return fetch(`${backendIP}${isAuthPath ? '/auth' : '/calendar'}${toURL}`, {
     method: method,
     headers: {
@@ -22,7 +22,7 @@ export default function sendAPICall(
       return response.json();
     })
     .then(data => {
-      console.log(data);
+      //console.log(data);
       if (data.error) {
         throw new Error(data.error);
       }

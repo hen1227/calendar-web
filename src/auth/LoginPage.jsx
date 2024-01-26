@@ -39,11 +39,11 @@ const LoginPage = () => {
 
                     navigate('/account');
                 }).catch((err) => {
-                    console.log("error: " + err);
+                    //console.log("error: " + err);
                 setErrorMessage(err.message);
             });
         } catch (err) {
-            console.log("error: " + err);
+            //console.log("error: " + err);
             setErrorMessage(err.message);
         }
     };
@@ -61,11 +61,11 @@ const LoginPage = () => {
 
                     navigate('/account');
                 }).catch((err) => {
-                console.log("error: " + err);
+                //console.log("error: " + err);
                 setErrorMessage(err.message);
             });
         } catch (err) {
-            console.log("error: " + err);
+            //console.log("error: " + err);
             setErrorMessage(err.message);
         }
     };
