@@ -1,8 +1,8 @@
 # SPS Now
 
-SPS Now is an all-in-one place for students to stay up-to-date with latest updates at SPS.
+SPS Now is an all-in-one place for students to stay up-to-date with latest updates at SPS. Designed for St. Paul's School in Concord, New Hampshire ([sps.edu](https://sps.edu))
 
-<h3>Try it out now at <ins>[spsnow.henhen1227.com](https://spsnow.henhen1227.com)</ins></h3>
+### Try it out now at <ins>[spsnow.henhen1227.com](https://spsnow.henhen1227.com)</ins>
 
 ## Features
 
@@ -10,23 +10,32 @@ SPS Now is an all-in-one place for students to stay up-to-date with latest updat
  - Club and Events database that allows students to send notifications about the latest happenings at SPS.
  - Up-to-date school menu system that allows students to see what is being served in the Coit Dining Hall and at Grab & Go.
 
-## The App
+## The SPS Now App
 
-SPS Now is also available as an iOS app. The app isn't updated as frequently as the website and is currently a version behind. 
+SPS Now is also available as an iOS app.
+The app isn't updated as frequently as the website and is currently a version behind.
+
+Download the app [here](https://apps.apple.com/us/app/sps-now/id6464536749).
 
 ## Contributing
 
-Developed and designed by **Henry Abrahamsen** '24 <Henhen1227@gmail.com>
+Developed and designed by **Henry Abrahamsen** '24 <Henry@Henhen1227.com>
 
 Method of loading live calendar updates from Google Calendar's API was found by **Jack Rubiralta** '25.
 
 Come by the Computer Science Club meetings on Tuesdays at 7:00 - 8:00 pm in Friedman Projects room 111 to learn how to get involved.
+
+I'd love to hear any suggestions or feedback you have about the project. Please email me at <henry.abrahamsen@sps.edu> or <henhen1227@gmail>
 
 ## Funding
 
 This project is currently running on the Henhen1227 servers. 
 
 To fund this project, please consider donating [here](https://www.buymeacoffee.com/henryabrahamsen/membership). 
+
+I've been eyeing the domain **SPSNow.app** which costs $30 USD per year.
+If interest is high enough, or if I get enough donations, I will purchase the domain and move the project over to it.
+
 
 ## Maintenance
 
