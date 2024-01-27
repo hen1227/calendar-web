@@ -22,11 +22,18 @@
     border-radius: 8px;
     background-color: #101020;
 
+    position: relative;
+
     scroll-snap-align: center;
 }
 
 .mealContainer {
     margin-top: 20px;
+}
+
+.mealDate {
+    position: static;
+    top: 10px;
 }
 
 .mealContainer h2 {

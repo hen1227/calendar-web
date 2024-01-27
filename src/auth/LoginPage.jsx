@@ -72,7 +72,7 @@ const LoginPage = () => {
 
     return (
         <div className={'main-view'} style={{justifyContent: "center", height: '100%'}}>
-            <h1>Login</h1>
+            <h1 style={{margin:0}}>Login</h1>
             <form className={'login-form'}>
                 <p>Email</p>
                 <input className={'input'} type="email" id="email" name="email" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value)}} required/>

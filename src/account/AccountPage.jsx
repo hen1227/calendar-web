@@ -34,8 +34,9 @@ const AccountPage = () => {
 
     return (
         <div className={'main-view'}>
-            <div style={{height: '70vh', marginBottom: 30}}>
-                <h1 style={{marginTop: 50}}>Account</h1>
+            <div>
+                <h1>Account</h1>
+                <p style={{color:'red', fontSize:10}}>**NOT your SPS login!**</p>
                 {currentUser && (
                     <>
                         <button style={{backgroundColor: '#f003', borderColor: '#f00c'}} className={'corner-button'} onClick={onDeleteClicked}>Delete</button>
@@ -84,11 +85,11 @@ const AccountPage = () => {
                     <Button title={'Logout'} onClick={()=>{
                         logout();
                     }} />
-                    <Button title={'Send Test Notification'} onClick={()=>{
-                        displayNotificationDirectly().then((data) => {
-                            //console.log('Success:', data);
-                        });
-                    }}/>
+                    {/*<Button title={'Send Test Notification'} onClick={()=>{*/}
+                    {/*    displayNotificationDirectly().then((data) => {*/}
+                    {/*        //console.log('Success:', data);*/}
+                    {/*    });*/}
+                    {/*}}/>*/}
                 </>
             )}
         </div>

@@ -69,7 +69,7 @@ const DiningPage = () => {
                         if (!initialOpenSections[mealType][meal.date]) {
                             initialOpenSections[mealType][meal.date] = {};
                         }
-                        initialOpenSections[mealType][meal.date][section.sectionTitle] = section.sectionTitle === 'Entree';
+                        initialOpenSections[mealType][meal.date][section.sectionTitle] = section.sectionTitle === 'Entree' || section.sectionTitle === 'Grab n\' Go Sandwiches';
                     }
                 }
             }
@@ -111,8 +111,8 @@ const DiningPage = () => {
 
     const sortSections = (sections) => {
         return sections.sort((a, b) => {
-            if (a.sectionTitle === 'Entree') return -1;
-            if (b.sectionTitle === 'Entree') return 1;
+            if (a.sectionTitle === 'Entree' || a.sectionTitle === 'Grab n\' Go Sandwiches') return -1;
+            if (b.sectionTitle === 'Entree' || b.sectionTitle === 'Grab n\' Go Sandwiches') return 1;
             return 0;
         });
     };
@@ -121,7 +121,7 @@ const DiningPage = () => {
         <div className="diningPage">
             {getUniqueDates().map(date => (
                 <div key={date} id={`mealContainer-${date}`} className="dayContainer">
-                    <h2>
+                    <h2 className={"mealDate"}>
                         {(() => {
                         const todayDate = new Date();
                             todayDate.setDate(date);
@@ -133,7 +133,7 @@ const DiningPage = () => {
                         return (
                             mealForTheDate && hasNonEmptySections(mealForTheDate) && (
                                 <div key={mealName} id={`mealContainer-${date}-${mealName}`} className="mealContainer">
-                                    <h3>{mealName.charAt(0).toUpperCase() +
+                                    <h3>{mealName === 'grabngo' ? 'Grab n\' Go' : mealName.charAt(0).toUpperCase() +
                                         mealName.slice(1)}</h3>
                                     {sortSections(mealForTheDate.sections).map((section, sectionIndex) => (
                                         section.foods && section.foods.length > 0 && (
@@ -154,7 +154,7 @@ const DiningPage = () => {
                                                 {isSectionOpen(mealName, date, section.sectionTitle) && (
                                                     <ul>
                                                         {section.foods.map(food => (
-                                                            <li key={food} style={section.sectionTitle === "Entree" ? {color: "#fff", fontWeight: "800"} : {}}>{food}</li>
+                                                            <li key={food} style={section.sectionTitle === "Entree" || section.sectionTitle === 'Grab n\' Go Sandwiches' ? {color: "#fff", fontWeight: "800"} : {}}>{food}</li>
                                                         ))}
                                                     </ul>
                                                 )}

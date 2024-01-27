@@ -6,7 +6,14 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    max-height: unset;
+    padding-bottom: 100px;
     /*position: relative;*/
+}
+
+.main-view h1 {
+    margin: 0;
+    padding-top: 30px;
 }
 
 .login-form {

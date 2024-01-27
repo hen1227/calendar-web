@@ -14,44 +14,50 @@ import EditClubDetailsPage from "./create/EditClubDetailsPage";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import DiningPage from "./dining/DiningPage";
+import ReactGA from 'react-ga4';
 
-// TODO: Fix text wrapping looking bad on calendar view.
+ReactGA.initialize("G-618QBD35MR");
 
 function App() {
-  return (
-      <AuthProvider>
-          <Router>
-              {/*<Navbar />*/}
-              <div className={"app"}>
-                  <Routes>
-                      <Route path="/" exact element={<CalendarPage />} />
-                      <Route path="/dining" exact element={<DiningPage />} />
-                      <Route path="/calendar" exact element={<CalendarPage />} />
-                      <Route path="/login" exact element={<LoginPage />} />
-                      <Route path="/create" element={<CreatePage />} />
-                      <Route path="/create/club" element={<CreateClubPage />} />
-                      <Route path="/create/event" element={<CreateEventPage />} />
-                      <Route path="/club/:clubId" element={<ClubDetailsPage />} />
-                      <Route path="/edit/:clubId" element={<EditClubDetailsPage />} />
-                      <Route path="/account" element={<AccountPage />} />
-                  </Routes>
-                  <BottomNavbar />
-              </div>
-              <ToastContainer
-                  position="top-right"
-                  autoClose={2000}
-                  hideProgressBar
-                  newestOnTop={false}
-                  closeOnClick
-                  rtl={false}
-                  pauseOnFocusLoss
-                  draggable
-                  pauseOnHover
-                  theme="dark"
-              />
-          </Router>
-      </AuthProvider>
-  );
+
+    if (window.location.hostname !== "localhost") {
+        ReactGA.send("pageview");
+    }
+
+    return (
+        <AuthProvider>
+            <Router>
+                {/*<Navbar />*/}
+                <div className={"app"}>
+                    <Routes>
+                        <Route path="/" exact element={<CalendarPage/>}/>
+                        <Route path="/dining" exact element={<DiningPage/>}/>
+                        <Route path="/calendar" exact element={<CalendarPage/>}/>
+                        <Route path="/login" exact element={<LoginPage/>}/>
+                        <Route path="/create" element={<CreatePage/>}/>
+                        <Route path="/create/club" element={<CreateClubPage/>}/>
+                        <Route path="/create/event" element={<CreateEventPage/>}/>
+                        <Route path="/club/:clubId" element={<ClubDetailsPage/>}/>
+                        <Route path="/edit/:clubId" element={<EditClubDetailsPage/>}/>
+                        <Route path="/account" element={<AccountPage/>}/>
+                    </Routes>
+                    <BottomNavbar/>
+                </div>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                />
+            </Router>
+        </AuthProvider>
+    );
 }
 
 export default App;

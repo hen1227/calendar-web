@@ -3,16 +3,10 @@
     justify-content: space-between;
     margin: 0 auto 0;
     width: 90%;
-    /*overflow-x: auto;*/
-    /*overflow-y: hidden;*/
     overflow: hidden;
 
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-
-    /*height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));*/
-    height: 100svh;
-
 
     /*    Grid */
     display: grid;
@@ -33,18 +27,19 @@
 }
 
 .calendarView {
+    position: relative;
     width: 80%;
     text-align: center;
-    position: relative;
 
     /* Scroll */
-    top: 10px;
-    height: 82.5svh;
+    height: 80svh;
     max-height: 100%;
     overflow-y: scroll;
     background: #151530;
-    border-radius: 30px;
-    padding: 30px 10%;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+    padding: 10px 10% 30px;
     margin: 20px 0 0 0;
 
     -ms-overflow-style: none;  /* IE and Edge */
@@ -67,15 +62,51 @@
 }
 
 .calendarColumn.fullscreen {
-    width: 90vw;
-    /*position: absolute;*/
+    width: 92vw;
     z-index: 100;
 }
+
 .calendarColumn.hidden {
     width: 0;
     margin: 0;
     padding: 0;
     display: none;
+}
+
+.calendar-column-header {
+    position: sticky;
+    width: 100%;
+    height: 50px;
+    top: 20px;
+    background: #151530;
+    color: #BEBEBEA0;
+    font-weight: bolder;
+
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.calendar-column-button {
+    position: relative;
+    width: 10%;
+    padding: 20px 5% 0;
+    height: 30px;
+    float: left;
+}
+
+.fullscreen-button {
+}
+
+.edit-button {
+    margin-left: 60%;
+}
+
+.day-classes-list h2 {
+    position: sticky;
+    top: -10px;
+    display: block;
+    background: #151530;
+    width: 100%;
 }
 
 .footer-left {
@@ -101,7 +132,7 @@
     max-width: 400px;
     width: 100%;
     height: fit-content;
-    min-height: 60px;
+    min-height: 50px;
 }
 
 .eventCard .clubName {
@@ -153,7 +184,7 @@
     text-align: center;
 }
 
-.dayCollection {
+.day-collection {
 /*   Grid children with 7 columns */
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -167,7 +198,7 @@
 
     /*margin-left: -5vw;*/
 
-    width: 72.5vw;
+    width: 100%
 }
 
 /* Make collection views swipable between screens: */
@@ -185,9 +216,24 @@
         margin: 0;
         padding: 0;
     }
+
     .calendarColumn {
         padding: 0 15vw;
         width: 100vw;
+    }
+
+    .calendar-column-header {
+        width: 90vw;
+        height: 70px;
+    }
+    .edit-button {
+        margin-left: 80%;
+    }
+
+    .day-classes-list h2 {
+        top: -30px;
+        height: 30px;
+        width: 105%;
     }
 
     .calendarView {
@@ -201,6 +247,8 @@
     }
 
     .footer {
+        position: sticky;
+        bottom: 0;
         display: flex;
         flex-direction: row;
         justify-content: space-between;

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import './ColorPicker.css'
+import '../ColorPicker.css'
 import Sketch from "@uiw/react-color-sketch";
 import sendAPICall from "../auth/APIs";
 import {Navigate} from "react-router-dom";
