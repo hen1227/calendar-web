@@ -80,7 +80,17 @@ async function createWeekSchedule() {
     // Sort the events by start time
     for (const day in upcomingWeekSchedule) {
         upcomingWeekSchedule[day].sort((a, b) => {
-            if((a.startTime).includes("AM") && (b.startTime).includes("PM")) return 1;
+            console.log("a:", a.startTime);
+            console.log("b:", b.startTime);
+            console.log("a < b:", a.startTime < b.startTime);
+            console.log("a > b:", a.startTime > b.startTime);
+            if((a.startTime).includes("AM") && (b.startTime).includes("PM")) return -1;
+            if((a.startTime).includes("PM") && (b.startTime).includes("AM")) return 1;
+
+            // if the time is 12:00 pm, it appears before 1:00 pm
+            if((a.startTime).includes("12:") && !(b.startTime).includes("12:")) return -1;
+            if(!(a.startTime).includes("12:") && (b.startTime).includes("12:")) return 1;
+
             if (a.startTime < b.startTime) return -1;
             if (a.startTime > b.startTime) return 1;
             return 0;
@@ -171,9 +181,6 @@ export async function calculateScheduleForDay(day) {
 
 
         if(isAFirstLunchBlock){
-            console.log("it is a first lunch block")
-            console.log(isFirstLunch)
-            console.log("for block: ", blockInfo.block)
             if(isFirstLunch){
                 blockName = "Lunch";
                 blockColor = userPreferences['Lunch']?.color || classDefaults['Lunch'].color;
