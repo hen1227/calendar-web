@@ -3,6 +3,7 @@ const weekSchedule = await createWeekSchedule();
 // Main function to retrieve the schedule for the week
 export async function getScheduleForWeek() {
     const scheduleForWeek = [];
+    loadUserPreferences();
 
     for (const day in weekSchedule) {
         scheduleForWeek.push(await calculateScheduleForDay(day));
@@ -74,44 +75,36 @@ async function createWeekSchedule() {
         if(upcomingWeekSchedule[dayOfWeek] !== undefined){
             upcomingWeekSchedule[dayOfWeek].push(event);
         }
-
-        // if (dayOfWeek === "Monday" ||
-        //     dayOfWeek === "Tuesday" ||
-        //     dayOfWeek === "Wednesday" ||
-        //     dayOfWeek === "Thursday" ||
-        //     dayOfWeek === "Friday" ||
-        //     dayOfWeek === "Saturday" ||
-        //     dayOfWeek === "Sunday") {
-        //     weekSchedule[dayOfWeek].push(formatEvent(event));
-        // }
-
     });
+
+    // Sort the events by start time
+    for (const day in upcomingWeekSchedule) {
+        upcomingWeekSchedule[day].sort((a, b) => {
+            if((a.startTime).includes("AM") && (b.startTime).includes("PM")) return 1;
+            if (a.startTime < b.startTime) return -1;
+            if (a.startTime > b.startTime) return 1;
+            return 0;
+        });
+    }
 
     return upcomingWeekSchedule;
 }
 
 export const classDefaults = {
-    'A': { block: 'A', name: 'Block A', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
-    'B': { block: 'B', name: 'Block B', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
-    'C': { block: 'C', name: 'Block C', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
-    'D': { block: 'D', name: 'Block D', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
-    'E': { block: 'E', name: 'Block E', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
-    'F': { block: 'F', name: 'Block F', color: '#FFBC00', duration: 45, isHumanities: false, isFirstLunch: true },
+    'A': { name: 'Block A', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'B': { name: 'Block B', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'C': { name: 'Block C', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'D': { name: 'Block D', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'E': { name: 'Block E', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'F': { name: 'Block F', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
 
-    'Humflex': { block: 'Humflex', name: '', color: '#4080FF', duration: 25 },
+    'FLEX': { block: 'Humflex', name: '', color: '#4080FF', duration: 25 },
     'House Meetings': { block: 'House Meetings', name: '', color: '#4080FF', duration: 25 },
     'Lunch': { block: 'Lunch', name: '', color: '#20EE75', duration: 45 },
     'Chapel': { block: 'Chapel', name: '', color: '#7520EE', duration: 25 },
 };
 
-export const userPreferences = {
-    // 'A': { name: 'Block A', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    // 'B': { name: 'Block B', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    // 'C': { name: 'Block C', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    // 'D': { name: 'Block D', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    // 'E': { name: 'Block E', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    // 'F': { name: 'Block F', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-}
+let userPreferences = {}
 
 export function loadUserPreferences() {
     for (const block in classDefaults) {
@@ -141,9 +134,13 @@ export async function calculateScheduleForDay(day) {
         const isFlex = blockInfo.block === 'FLEX';
 
         // Cannot read properties of undefined (reading 'isHumanities')
-        const isHum = userPreferences[block]?.isHumanities || classDefaults[block].isHumanities;
-        const isFirstLunch = userPreferences[block]?.isFirstLunch || classDefaults[block].isFirstLunch;
-        let blockName = userPreferences[blockInfo.block]?.name || classDefaults[block].name;
+        if (userPreferences[block] === undefined) {
+            userPreferences[block] = classDefaults[block];
+        }
+
+        const isHum = userPreferences[block].isHumanities;
+        const isFirstLunch = userPreferences[block].isFirstLunch; // can't do the `||` thing because they are bools lol smh
+        let blockName = userPreferences[block]?.name || classDefaults[block].name;
         let blockColor = userPreferences[block]?.color || classDefaults[block].color;
 
         let skipThis = false;
@@ -161,8 +158,8 @@ export async function calculateScheduleForDay(day) {
         }
 
         if (isFlex){
-            const previousBlock = scheduleForDay[currentIndex - 1]?.block.replace(/[0-9]/g, '');
-            const nextBlock = scheduleForDay[currentIndex + 1]?.block.replace(/[0-9]/g, '');
+            const previousBlock = scheduleForDay[currentIndex - 1].block.replace(/[0-9]/g, '');
+            const nextBlock = scheduleForDay[currentIndex + 1].block.replace(/[0-9]/g, '');
 
             const isPreviousBlockHum = userPreferences[previousBlock]?.isHumanities || classDefaults[previousBlock].isHumanities;
             const isNextBlockHum = userPreferences[nextBlock]?.isHumanities || classDefaults[nextBlock].isHumanities;
@@ -172,7 +169,11 @@ export async function calculateScheduleForDay(day) {
             }
         }
 
+
         if(isAFirstLunchBlock){
+            console.log("it is a first lunch block")
+            console.log(isFirstLunch)
+            console.log("for block: ", blockInfo.block)
             if(isFirstLunch){
                 blockName = "Lunch";
                 blockColor = userPreferences['Lunch']?.color || classDefaults['Lunch'].color;
@@ -211,9 +212,9 @@ export async function calculateScheduleForDay(day) {
             block: 'NO CLASSES!',
             name: '',
             color: '#bfffd9',
-            duration: 1440,
-            startTime: '',
-            endTime: ''
+            duration: 60,
+            startTime: ':', // makes :-)
+            endTime: ')'
         });
     }
 
@@ -235,6 +236,7 @@ export function saveClassDetails(block, details) {
     userPreferences[block] = details;
     try {
         // Attempt to save user's custom data to AsyncStorage
+        console.log("saved class details", block, details)
         localStorage.setItem(`class-name-${block}`, JSON.stringify(details));
     } catch (error) {
         console.error('Error saving class details:', error);
