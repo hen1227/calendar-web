@@ -107,6 +107,7 @@
     display: block;
     background: #151530;
     width: 100%;
+    font-size: 18px;
 }
 
 .footer-left {
@@ -144,7 +145,7 @@
 }
 
 .eventCard .title {
-    font-size: 1.15em;
+    font-size: 1.10em;
     font-weight: bold;
     text-align: center;
     margin: 0;
@@ -156,7 +157,8 @@
     justify-content: space-between;
     align-items: center;
     line-height: 20px;
-    padding: 2px 20px;
+    padding: 2px 8px;
+    font-size: 14px;
 }
 
 .eventCard p {
@@ -234,6 +236,7 @@
         top: -30px;
         height: 30px;
         width: 105%;
+        font-size: 18px;
     }
 
     .calendarView {
