@@ -80,10 +80,6 @@ async function createWeekSchedule() {
     // Sort the events by start time
     for (const day in upcomingWeekSchedule) {
         upcomingWeekSchedule[day].sort((a, b) => {
-            console.log("a:", a.startTime);
-            console.log("b:", b.startTime);
-            console.log("a < b:", a.startTime < b.startTime);
-            console.log("a > b:", a.startTime > b.startTime);
             if((a.startTime).includes("AM") && (b.startTime).includes("PM")) return -1;
             if((a.startTime).includes("PM") && (b.startTime).includes("AM")) return 1;
 

@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './CalendarPage.css';
 import '../classes/ClassEditor.css';
 import '../ColorPicker.css';
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import {useAuth} from "../auth/AuthContext";
 import {getClassDetails, getScheduleForWeek, isPast, saveClassDetails} from "./SchoolClassesCalendar";
 import {useNavigate} from "react-router-dom";

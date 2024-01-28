@@ -1,4 +1,4 @@
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 
 export async function sendVerificationEmail(user){
     sendAPICall(`/sendVerificationEmail`, 'POST', {}, user)

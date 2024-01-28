@@ -1,7 +1,7 @@
 import {useAuth} from "../auth/AuthContext";
 import Button from "../components/Button";
 import './AccountPage.css';
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import {useNavigate} from "react-router-dom";
 import {sendVerificationEmail} from "../components/VerificationEmail";
 import {toast} from "react-toastify";

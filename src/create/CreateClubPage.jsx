@@ -1,7 +1,7 @@
 import {useState} from "react";
 import '../ColorPicker.css'
 import Sketch from "@uiw/react-color-sketch";
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import {Navigate} from "react-router-dom";
 import {useAuth} from "../auth/AuthContext";
 import {useNavigate} from "react-router-dom";

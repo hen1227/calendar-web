@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import {useAuth} from "../auth/AuthContext";
 import {toast} from "react-toastify";
 // import 'react-calendar/dist/Calendar.css';

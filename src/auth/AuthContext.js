@@ -1,6 +1,6 @@
 import React from 'react';
 import {createContext, useContext, useEffect, useState} from "react";
-import sendAPICall from "./APIs";
+import sendAPICall from "../APIs";
 import {subscribeUserToPush} from "../Notifications";
 
 const AuthContext = createContext();

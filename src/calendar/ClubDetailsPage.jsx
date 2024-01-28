@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import Button from "../components/Button";
 import {useAuth} from "../auth/AuthContext";
 import {toast} from "react-toastify";

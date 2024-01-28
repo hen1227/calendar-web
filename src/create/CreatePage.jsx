@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import {useAuth} from "../auth/AuthContext";
 import LoginPage from "../auth/LoginPage";
 import Button from "../components/Button";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from 'react-router-dom';
 import {useAuth} from "../auth/AuthContext";
-import sendAPICall from "../auth/APIs";
+import sendAPICall from "../APIs";
 import Button from "../components/Button";
 import Sketch from "@uiw/react-color-sketch";
 import {toast} from "react-toastify";

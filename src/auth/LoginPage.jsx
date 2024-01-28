@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import sendAPICall from "./APIs";
+import sendAPICall from "../APIs";
 import {useAuth} from "./AuthContext";
 import './LoginPage.css'
 import {useNavigate} from "react-router-dom";
