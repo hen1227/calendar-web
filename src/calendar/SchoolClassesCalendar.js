@@ -97,12 +97,12 @@ async function createWeekSchedule() {
 }
 
 export const classDefaults = {
-    'A': { name: 'Block A', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    'B': { name: 'Block B', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    'C': { name: 'Block C', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    'D': { name: 'Block D', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    'E': { name: 'Block E', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
-    'F': { name: 'Block F', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'A': { name: '', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'B': { name: '', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'C': { name: '', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'D': { name: '', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'E': { name: '', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
+    'F': { name: '', color: '#FFBC00', isHumanities: false, isFirstLunch: true },
 
     'FLEX': { block: 'Humflex', name: '', color: '#4080FF', duration: 25 },
     'House Meetings': { block: 'House Meetings', name: '', color: '#4080FF', duration: 25 },
