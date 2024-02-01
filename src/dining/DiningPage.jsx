@@ -160,9 +160,9 @@ const DiningPage = () => {
         const handleTouchEnd = (event) => {
             if (tapTimer) {
                 if (event.changedTouches[0].clientX < 100) {
-                    navigateDate('prev');
+                    // navigateDate('prev');
                 } else if(event.changedTouches[0].clientX > window.innerWidth - 100) {
-                    navigateDate('next');
+                    // navigateDate('next');
                 }
             }
         }
