@@ -15,8 +15,9 @@ export async function getScheduleForWeek() {
 // Load the Google API JavaScript on the client
 async function getCalendarEvents(dateFrom, dateTo) {
     const formatDate = (date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const apiKey = "AIzaSyBxoBIAkPxbC1hZNtFOmpHFv_z2ya9I838";
     // Get the calendar events for the week from school's Google Calendar API
-    const url = `https://www.googleapis.com/calendar/v3/calendars/spsacademiccal%40gmail.com/events?key=AIzaSyBxoBIAkPxbC1hZNtFOmpHFv_z2ya9I838&timeMin=${formatDate(dateFrom)}T00%3A00%3A00-05%3A00&timeMax=${formatDate(dateTo)}T00%3A00%3A00-05%3A00&singleEvents=true&maxResults=9999`;
+    const url = `https://www.googleapis.com/calendar/v3/calendars/spsacademiccal%40gmail.com/events?key=${apiKey}&timeMin=${formatDate(dateFrom)}T00%3A00%3A00-05%3A00&timeMax=${formatDate(dateTo)}T00%3A00%3A00-05%3A00&singleEvents=true&maxResults=9999`;
 
     const response = await fetch(url, { method: 'GET' });
     const data = await response.json();
@@ -250,23 +251,13 @@ function getUpcomingWeekDates() {
     // Get the current date
     const currentDate = new Date();
 
-    // Calculate the day number with Monday as the start of the week
-    let day = currentDate.getDay();
-    let diff = currentDate.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+    // Get date for the start of the week (Most recent Monday)
+    const weekStart = new Date(currentDate);
+    weekStart.setDate(currentDate.getDate() - currentDate.getDay() + (currentDate.getDay() === 0 ? -6 : 1));
 
-    // Calculate the first day of the week (Monday)
-    const weekStart = new Date(currentDate.setDate(diff));
-
-    // Reset the date to the current date
-    currentDate.setDate(new Date().getDate());
-
-    // Calculate the last day of the week (Sunday)
-    day = currentDate.getDay();
-    diff = currentDate.getDate() - day + (day === 0 ? 0 : 7);
-    const weekEnd = new Date(currentDate.setDate(diff));
-
-    console.log(weekStart.toDateString()); // Start of the week (Monday)
-    console.log(weekEnd.toDateString());   // End of the week (Sunday)
+    // Get date for the end of the week (Most recent Sunday)
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
 
     return {weekStart, weekEnd};
 }
