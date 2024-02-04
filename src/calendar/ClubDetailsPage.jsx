@@ -55,7 +55,7 @@ const ClubDetailsPage = () => {
         <div className={'main-view'}>
             {clubData && (
                 <div>
-                    <h1 style={{margin: '50px auto', width:'fit-content', borderBottomStyle: 'solid', borderBottomColor: clubData.color, borderBottomWidth: 2}}>{clubData.name}</h1>
+                    <h1 style={{margin: '0 auto 50px', width:'fit-content', borderBottomStyle: 'solid', borderBottomColor: clubData.color, borderBottomWidth: 2}}>{clubData.name}</h1>
                     <p>{clubData.description}</p>
                     <h3 style={{marginTop: 50}}>Leaders</h3>
                     {clubData.leaders && clubData.leaders.length > 0 && clubData.leaders.map((leader) => {
