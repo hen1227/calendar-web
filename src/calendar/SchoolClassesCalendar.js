@@ -251,9 +251,9 @@ function getUpcomingWeekDates() {
     // Get the current date
     const currentDate = new Date();
 
-    // Get date for the start of the week (Most recent Monday)
+    // Get date for the start of the week (Most recent Monday) unless it is sunday, in which case, show the next week
     const weekStart = new Date(currentDate);
-    weekStart.setDate(currentDate.getDate() - currentDate.getDay() + (currentDate.getDay() === 0 ? -6 : 1));
+    weekStart.setDate(currentDate.getDate() + (8 - currentDate.getDay()) % 7);
 
     // Get date for the end of the week (Most recent Sunday)
     const weekEnd = new Date(weekStart);
