@@ -13,9 +13,18 @@ SPS Now is an all-in-one place for students to stay up-to-date with latest updat
 ## The SPS Now App
 
 SPS Now is also available as an iOS app.
-The app isn't updated as frequently as the website and is currently a version behind.
+The app isn't updated as frequently as the website and is currently a couple versions behind.
 
 Download the app [here](https://apps.apple.com/us/app/sps-now/id6464536749).
+
+## Backend Server/Database
+
+The backend server is also open source
+and can be found [https://github.com/hen1227/calendar-backend](https://github.com/hen1227/calendar-backend).
+
+The database and backend server are both hosted on the Henhen1227 servers. 
+Precautions have been taken to ensure the security of the database and server,
+but I cannot guarantee the safety of the data.
 
 ## Contributing
 
